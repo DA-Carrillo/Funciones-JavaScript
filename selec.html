@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Select</title>
+</head>
+<body>
+	<center>
+
+
+		<select style="width:150px; height: 100px;" multiple="multiple" id="lista_izquierda">
+			<option value="1">Volvo</option>
+			<option value="2">Mazda</option>
+			<option value="3">Chevrolet</option>
+			<option value="4">KIA</option>
+			<option value="5">Ford</option>
+		</select>
+
+		<input type="button" onclick="PasarParametro('lista_izquierda','lista_derecha')" value="PASAR" />
+		<input type="button" onclick="PasarParametro('lista_derecha','lista_izquierda')" value="REGRESAR"/>
+
+		<select style="width:150px; height: 100px;" multiple="multiple" id="lista_derecha">	 		
+		</select>
+
+
+		<br><br><br><br>
+
+		<h1>Taller con listas</h1></body></body>
+		<p>Seleccione uno o varios items a la izquierda y al dar clic en el botón >> pasarlos a la lista de la derecha</p>	
+		<select multiple name="autos" id="autosIzquierda" size=5>    
+			<option id="opt1" value="Mercedes">Mercedes Benz</option>    
+			<option id="opt2" value="Fiat">Fiat</option>    
+			<option id="opt3" value="Chevrolet">Chevrolet</option>    
+			<option id="opt4" value="Mazda">Mazda</option>    
+			<option id="opt5" value="Reanult">Renault</option>    
+		</select>   
+		<button type="button" onclick="ContarItemsSeleccionados()"> PASAR </button>
+		<select multiple name="autos" id="autosDerecha" size=5>    		   
+		</select>
+	</center>
+</body>
+<script type="text/javascript">
+
+	function PasarParametro(origen_id, destino_id){
+		obj = document.getElementById(origen_id);
+		if(obj.selectedIndex == -1){
+			return;
+		}
+		valor = obj.value;
+		txt = obj.options[obj.selectedIndex].text;
+		obj.options[obj.selectedIndex] = null;
+		obj2 = document.getElementById(destino_id);
+		opc = new Option(txt, valor);
+		eval(obj2.options[obj2.options.length] = opc);
+		return false;
+	}
+
+	//Autor: Pablo Robayo
+	function ContarItemsSeleccionados()
+	{
+		console.log("Funciones.js cargado correctamente");
+    //cuento el número de items seleccionados
+    var seleccionados = [];
+    var listaIzq = document.getElementById("autosIzquierda").options;
+    var listaDer = document.getElementById("autosDerecha").options;
+
+    for(var i = 0; i < listaIzq.length; i++){
+    	if(listaIzq[i].selected)
+    		seleccionados.push(listaIzq[i]);        
+    };  
+    for(var j=0; j < seleccionados.length; j++){
+    	listaDer.add(seleccionados[j]);
+    }
+}
+</script>
+</html>
